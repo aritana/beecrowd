@@ -4,7 +4,7 @@ import kotlin.math.pow
 
 fun main(args: Array<String>) {
 
-    timeConversion()
+    ageInDays()
 
 }
 
@@ -253,7 +253,7 @@ fun banknotesSecondWay() {
 
     val reader = Scanner(System.`in`)
     var value = reader.nextInt()
-    if(value == 0)
+    if (value == 0)
         return
 
     var valueSaved = value
@@ -297,13 +297,35 @@ fun timeConversion() {
     var value = reader.nextInt()
 
     val hour = value / 3600
-    val minute = (value % 3600)/60
-    val second = (value % 3600)% 60
+    val minute = (value % 3600) / 60
+    val second = (value % 3600) % 60
 
-    println( String.format(
-        "%d:%d:%d",
-        hour,
-        minute,
-        second
-    ))
+    println(
+        String.format(
+            "%d:%d:%d",
+            hour,
+            minute,
+            second
+        )
+    )
 }
+
+//https://www.beecrowd.com.br/judge/en/problems/view/1020
+fun ageInDays() {
+    val reader = Scanner(System.`in`)
+    var ageInDays = reader.nextInt()
+
+    val years = ageInDays / 365
+    var months = (ageInDays % 365) / 30
+    var days = (ageInDays % 365) % 30
+
+    println(
+        String.format(
+            "%d ano(s)%n%d mes(es)%n%d dia(s)",
+            years,
+            months,
+            days
+        )
+    )
+}
+
