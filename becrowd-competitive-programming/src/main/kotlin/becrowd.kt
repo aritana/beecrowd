@@ -1,11 +1,11 @@
+import java.math.BigDecimal
 import java.util.*
 import kotlin.math.pow
 
 
 fun main(args: Array<String>) {
 
-    ageInDays()
-
+    banknotesAndCoins()
 }
 
 fun areaOfCircle() {
@@ -248,6 +248,7 @@ fun banknotes() {
 
 }
 
+//https://www.beecrowd.com.br/judge/en/problems/view/1018
 //TODO
 fun banknotesSecondWay() {
 
@@ -327,5 +328,75 @@ fun ageInDays() {
             days
         )
     )
+}
+//https://www.beecrowd.com.br/judge/en/problems/view/1021
+fun banknotesAndCoins() {
+    val reader = Scanner(System.`in`)
+    var floatingMoneyValue = reader.nextDouble()
+    var bigDecimal:BigDecimal = floatingMoneyValue.toBigDecimal()
+    var integerMoneyValue = bigDecimal.toInt()
+    var moneyInCoin = bigDecimal.subtract(integerMoneyValue.toBigDecimal()).toDouble()
+
+
+    val bankNotesValue = listOf(100, 50, 20, 10, 5, 2)
+    val bankCoinsValue = listOf<Double>(1.00, 0.50, 0.25, 0.10, 0.05, 0.01)
+    val bankNotesQuantity = mutableMapOf<Float, Int>()
+    val bankCoinsQuantity = mutableMapOf<Double, Int>()
+
+    for (noteValue in bankNotesValue) {
+        val quantity = integerMoneyValue % noteValue
+        val numberOfNotes = integerMoneyValue / noteValue
+
+        when (integerMoneyValue) {
+            0 -> {
+                bankNotesQuantity[noteValue.toFloat()] = 0
+            }
+
+            quantity -> {
+                bankNotesQuantity[noteValue.toFloat()] = 0
+            }
+
+            else -> {
+                bankNotesQuantity[noteValue.toFloat()] = numberOfNotes
+                integerMoneyValue -= numberOfNotes * noteValue
+            }
+        }
+    }
+    moneyInCoin+=integerMoneyValue
+
+    for (coinValue in bankCoinsValue) {
+        var divisionOfCoinInAValue = moneyInCoin / coinValue
+        var reminder = moneyInCoin.toBigDecimal().remainder(coinValue.toBigDecimal())
+
+        bigDecimal = divisionOfCoinInAValue.toBigDecimal()
+        var integerCoinValue = bigDecimal.toInt()
+
+        if (integerCoinValue > 0) {
+            bankCoinsQuantity[coinValue] = integerCoinValue
+            moneyInCoin =reminder.toDouble()
+        } else {
+            bankCoinsQuantity[coinValue] = 0
+        }
+    }
+    println("NOTAS:")
+    bankNotesQuantity.forEach { (value, quantity) ->
+        println(
+            String.format(
+                "%d nota(s) de R\$ %d.00",
+                quantity,
+                value.toInt()
+            )
+        )
+    }
+    println("MOEDAS:")
+    bankCoinsQuantity.forEach { (value, quantity) ->
+        println(
+            String.format(Locale.US,
+                "%d moeda(s) de R\$ %.2f",
+                quantity,
+                value
+            )
+        )
+    }
 }
 
