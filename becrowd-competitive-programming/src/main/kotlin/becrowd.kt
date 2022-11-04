@@ -5,7 +5,8 @@ import kotlin.math.pow
 
 fun main(args: Array<String>) {
 
-    selectionTest1()
+   bhaskaraFormula()
+
 }
 
 fun areaOfCircle() {
@@ -423,4 +424,24 @@ fun selectionTest1() {
                     }
 
     println("Valores nao aceitos")
+}
+
+fun bhaskaraFormula() {
+    val reader = Scanner(System.`in`)
+    val A = reader.nextDouble()
+    val B = reader.nextDouble()
+    val C = reader.nextDouble()
+
+    val delta = B.pow(2) - 4 * A * C
+
+    if(delta < 0 || (2*A) <=0 ){
+        println("Impossivel calcular")
+        return
+    }
+    val x1 = (-B + Math.sqrt(delta)) / (2 * A)
+    val x2 = (-B - Math.sqrt(delta)) / (2 * A)
+
+    println(String.format("R1 = %.5f", x1))
+    println(String.format("R2 = %.5f", x2))
+
 }
