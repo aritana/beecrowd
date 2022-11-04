@@ -5,7 +5,7 @@ import kotlin.math.pow
 
 fun main(args: Array<String>) {
 
-    banknotesAndCoins()
+    selectionTest1()
 }
 
 fun areaOfCircle() {
@@ -329,11 +329,12 @@ fun ageInDays() {
         )
     )
 }
+
 //https://www.beecrowd.com.br/judge/en/problems/view/1021
 fun banknotesAndCoins() {
     val reader = Scanner(System.`in`)
     var floatingMoneyValue = reader.nextDouble()
-    var bigDecimal:BigDecimal = floatingMoneyValue.toBigDecimal()
+    var bigDecimal: BigDecimal = floatingMoneyValue.toBigDecimal()
     var integerMoneyValue = bigDecimal.toInt()
     var moneyInCoin = bigDecimal.subtract(integerMoneyValue.toBigDecimal()).toDouble()
 
@@ -362,7 +363,7 @@ fun banknotesAndCoins() {
             }
         }
     }
-    moneyInCoin+=integerMoneyValue
+    moneyInCoin += integerMoneyValue
 
     for (coinValue in bankCoinsValue) {
         var divisionOfCoinInAValue = moneyInCoin / coinValue
@@ -373,7 +374,7 @@ fun banknotesAndCoins() {
 
         if (integerCoinValue > 0) {
             bankCoinsQuantity[coinValue] = integerCoinValue
-            moneyInCoin =reminder.toDouble()
+            moneyInCoin = reminder.toDouble()
         } else {
             bankCoinsQuantity[coinValue] = 0
         }
@@ -391,7 +392,8 @@ fun banknotesAndCoins() {
     println("MOEDAS:")
     bankCoinsQuantity.forEach { (value, quantity) ->
         println(
-            String.format(Locale.US,
+            String.format(
+                Locale.US,
                 "%d moeda(s) de R\$ %.2f",
                 quantity,
                 value
@@ -400,3 +402,25 @@ fun banknotesAndCoins() {
     }
 }
 
+//https://www.beecrowd.com.br/judge/en/problems/view/1035
+fun selectionTest1() {
+    val reader = Scanner(System.`in`)
+    val A = reader.nextInt()
+    val B = reader.nextInt()
+    val C = reader.nextInt()
+    val D = reader.nextInt()
+
+    val sumOfCD = C + D
+    val sumOfAB = A + B
+
+    if (B > C)
+        if (D > A)
+            if (sumOfCD > sumOfAB)
+                if (C > 0 && D > 0)
+                    if (A % 2 == 0) {
+                        println("Valores aceitos")
+                        return
+                    }
+
+    println("Valores nao aceitos")
+}
